@@ -69,11 +69,11 @@ class I2CBus(JNTBus):
         try:
             os.system('modprobe i2c-dev')
         except :
-            log.exception("[%s] - Can't load i2c-* kernel modules", self.__class__.__name__)
+            logger.exception("[%s] - Can't load i2c-* kernel modules", self.__class__.__name__)
         try:
             os.system('modprobe i2c-bcm2708')
         except :
-            log.exception("[%s] - Can't load i2c-* kernel modules", self.__class__.__name__)
+            logger.exception("[%s] - Can't load i2c-* kernel modules", self.__class__.__name__)
         JNTBus.__init__(self, **kwargs)
         self._i2c_lock = threading.Lock()
         self._ada_i2c = I2C
