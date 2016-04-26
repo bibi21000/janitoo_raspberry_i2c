@@ -76,7 +76,7 @@ class I2CBus(JNTBus):
             os.system('modprobe i2c-bcm2708')
         except :
             logger.exception("[%s] - Can't load i2c-* kernel modules", self.__class__.__name__)
-        JNTBus.__init__(self, oid=oid, **kwargs)
+        JNTBus.__init__(self, **kwargs)
         self._i2c_lock = threading.Lock()
         self._ada_i2c = I2C
         """ The shared ADAFruit I2C bus """
