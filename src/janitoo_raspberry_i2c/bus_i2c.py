@@ -63,7 +63,7 @@ class I2CBus(JNTBus):
     """A pseudo-bus to handle the Raspberry I2C Bus
     """
 
-    def __init__(self, oid=OID, **kwargs):
+    def __init__(self, **kwargs):
         """
         :param int bus_id: the SMBus id (see Raspberry Pi documentation)
         :param kwargs: parameters transmitted to :py:class:`smbus.SMBus` initializer
@@ -80,7 +80,7 @@ class I2CBus(JNTBus):
         self._i2c_lock = threading.Lock()
         self._ada_i2c = I2C
         """ The shared ADAFruit I2C bus """
-        self.load_extensions(self.oid)
+        self.load_extensions(OID)
         self.export_attrs('i2c_acquire', self.i2c_acquire)
         self.export_attrs('i2c_release', self.i2c_release)
 
