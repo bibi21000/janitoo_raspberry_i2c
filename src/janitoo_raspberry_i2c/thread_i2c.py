@@ -56,8 +56,10 @@ COMMAND_CONTROLLER = 0x1050
 assert(COMMAND_DESC[COMMAND_CONTROLLER] == 'COMMAND_CONTROLLER')
 ##############################################################
 
+OID = 'rpii2c'
+
 def make_thread(options):
-    if get_option_autostart(options, 'rpii2c') == True:
+    if get_option_autostart(options, OID) == True:
         return RpiI2CThread(options)
     else:
         return None
@@ -70,5 +72,5 @@ class RpiI2CThread(JNTBusThread):
         """Build the bus
         """
         from janitoo_raspberry_i2c.bus_i2c import I2CBus
-        self.section = 'rpii2c'
+        self.section = OID
         self.bus = I2CBus(options=self.options, oid=self.section, product_name="Raspberry I2C bus")

@@ -41,6 +41,8 @@ from janitoo.options import get_option_autostart
 
 import Adafruit_GPIO.I2C as I2C
 
+from janitoo_raspberry_i2c.thread_i2c import OID
+
 ##############################################################
 #Check that we are in sync with the official command classes
 #Must be implemented for non-regression
@@ -61,7 +63,7 @@ class I2CBus(JNTBus):
     """A pseudo-bus to handle the Raspberry I2C Bus
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, oid=OID, **kwargs):
         """
         :param int bus_id: the SMBus id (see Raspberry Pi documentation)
         :param kwargs: parameters transmitted to :py:class:`smbus.SMBus` initializer
@@ -74,7 +76,7 @@ class I2CBus(JNTBus):
             os.system('modprobe i2c-bcm2708')
         except :
             logger.exception("[%s] - Can't load i2c-* kernel modules", self.__class__.__name__)
-        JNTBus.__init__(self, **kwargs)
+        JNTBus.__init__(self, oid=oid, **kwargs)
         self._i2c_lock = threading.Lock()
         self._ada_i2c = I2C
         """ The shared ADAFruit I2C bus """
