@@ -84,7 +84,7 @@ class I2CBus(JNTBus):
         self.export_attrs('i2c_acquire', self.i2c_acquire)
         self.export_attrs('i2c_release', self.i2c_release)
 
-    def i2c_acquire(self):
+    def i2c_acquire(self, blocking=True):
         """Get a lock on the bus"""
         if self._i2c_lock.acquire(blocking):
             return True
