@@ -132,6 +132,10 @@ develop:
 	@echo "Installation for developpers of ${MODULENAME} finished."
 
 docker-deps:
+	-test -d docker/config && cp -rf docker/config/* /opt/janitoo/etc/
+	-test -d docker/supervisor.conf.d && cp -rf docker/supervisor.conf.d/* /etc/supervisor/janitoo.conf.d/
+	-test -d docker/supervisor-tests.conf.d && cp -rf docker/supervisor-tests.conf.d/* /etc/supervisor/janitoo-tests.conf.d/
+	-test -d docker/nginx && cp -rf docker/nginx/* /etc/nginx/conf.d/
 	pip install smbus-cffi
 	@echo
 	@echo "Docker dependencies for ${MODULENAME} installed."
@@ -159,10 +163,6 @@ docker-tests:
 	[ -f tests/test_docker.py ] && $(NOSE) $(NOSEOPTS) $(NOSEDOCKER) tests/test_docker.py
 	@echo
 	@echo "Docker tests for ${MODULENAME} finished."
-
-docker-inst:
-	@echo "Configure Docker image."
-	@echo
 
 tests:
 	-mkdir -p ${BUILDDIR}/docs/html/tools/coverage
