@@ -68,19 +68,13 @@ class I2CBus(JNTBus):
         :param int bus_id: the SMBus id (see Raspberry Pi documentation)
         :param kwargs: parameters transmitted to :py:class:`smbus.SMBus` initializer
         """
-        try:
-            os.system('modprobe i2c-dev')
-        except :
-            logger.exception("[%s] - Can't load i2c-* kernel modules", self.__class__.__name__)
-        try:
-            os.system('modprobe i2c-bcm2708')
-        except :
-            logger.exception("[%s] - Can't load i2c-* kernel modules", self.__class__.__name__)
+        self.kernel_modprobe('i2c-dev')
+        self.kernel_modprobe('i2c-bcm2708')
         JNTBus.__init__(self, **kwargs)
         self._i2c_lock = threading.Lock()
+        self.load_extensions(OID)
         self._ada_i2c = I2C
         """ The shared ADAFruit I2C bus """
-        self.load_extensions(OID)
         self.export_attrs('i2c_acquire', self.i2c_acquire)
         self.export_attrs('i2c_release', self.i2c_release)
 
