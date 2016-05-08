@@ -38,7 +38,6 @@ endif
 MODULENAME   = $(shell basename `pwd`)
 NOSEMODULES  = janitoo,janitoo_factory,janitoo_db
 MOREMODULES  = janitoo_factory_ext,janitoo_raspberry
-MOREMODULES =
 
 DEBIANDEPS := $(shell [ -f debian.deps ] && cat debian.deps)
 BASHDEPS := $(shell [ -f bash.deps ] && echo "bash.deps")
