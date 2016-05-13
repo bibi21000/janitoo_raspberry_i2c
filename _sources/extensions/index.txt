@@ -1,0 +1,13 @@
+janitoo_raspberry_i2c package
+=============================
+
+Show janitoo's extensions.
+
+Core extensions
+---------------
+
+Threads
+^^^^^^^
+
+ - rpii2c (janitoo_raspberry_i2c.thread_i2c:make_thread)
+

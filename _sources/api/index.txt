@@ -1,0 +1,30 @@
+janitoo_raspberry_i2c package
+=============================
+
+Submodules
+----------
+
+janitoo_raspberry_i2c.bus_i2c module
+------------------------------------
+
+.. automodule:: janitoo_raspberry_i2c.bus_i2c
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+janitoo_raspberry_i2c.thread_i2c module
+---------------------------------------
+
+.. automodule:: janitoo_raspberry_i2c.thread_i2c
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: janitoo_raspberry_i2c
+    :members:
+    :undoc-members:
+    :show-inheritance:
