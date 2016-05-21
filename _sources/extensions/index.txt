@@ -1,13 +1,7 @@
-janitoo_raspberry_i2c package
-=============================
+Janitoo's extensions
+====================
 
-Show janitoo's extensions.
+This package contains the following extensions for Janitoo.
 
-Core extensions
----------------
-
-Threads
-^^^^^^^
-
- - rpii2c (janitoo_raspberry_i2c.thread_i2c:make_thread)
+.. jnt-extensions::
 
