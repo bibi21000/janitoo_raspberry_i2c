@@ -41,7 +41,7 @@ from janitoo.options import get_option_autostart
 
 import Adafruit_GPIO.I2C as I2C
 
-from janitoo_raspberry_i2c.thread_i2c import OID
+from janitoo_raspberry_i2c import OID
 
 ##############################################################
 #Check that we are in sync with the official command classes
