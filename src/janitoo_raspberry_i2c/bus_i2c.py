@@ -77,6 +77,18 @@ class I2CBus(JNTBus):
         """ The shared ADAFruit I2C bus """
         self.export_attrs('i2c_acquire', self.i2c_acquire)
         self.export_attrs('i2c_release', self.i2c_release)
+        self.export_attrs('get_i2c_device', self.get_i2c_device)
+        self.export_attrs('get_busnum', self.get_busnum)
+        self.export_attrs('software_reset', self.software_reset)
+        self.export_attrs('require_repeated_start', self.require_repeated_start)
+
+        uuid="%s_busnum"%OID
+        self.values[uuid] = self.value_factory['config_integer'](options=self.options, uuid=uuid,
+            node_uuid=self.uuid,
+            help='The I2C bus number to use. Set it to None to get default bus',
+            label='BusNum',
+            default=None,
+        )
 
     def i2c_acquire(self, blocking=True):
         """Get a lock on the bus"""
@@ -87,3 +99,22 @@ class I2CBus(JNTBus):
     def i2c_release(self):
         """Release a lock on the bus"""
         self._i2c_lock.release()
+
+    def get_busnum(self):
+        """Get the bus num depending of the plateform"""
+        if self.values["%s_busnum"%OID].data is None:
+            return self._ada_i2c.get_default_bus()
+        return self.values["%s_busnum"%OID].data
+
+    def get_i2c_device(self, address, **kwargs):
+        """Get the device at address"""
+        return self._ada_i2c.get_i2c_device(address, busnum=self.get_busnum(), i2c_interface=self._ada_i2c, **kwargs )
+
+    def require_repeated_start(self):
+        """Get the default bus num depending of the plateform"""
+        return self._ada_i2c.require_repeated_start()
+
+    def software_reset(self):
+        "Sends a software reset (SWRST) command to all the servo drivers on the bus"
+        general_call_i2c = self.get_i2c_device(0x00)
+        general_call_i2c.writeRaw8(0x06)        # SWRST
