@@ -170,3 +170,6 @@ debch:
 
 deb:
 	dpkg-buildpackage
+
+boot_config:
+	[ $( grep -c ^dtparam=i2c_arm=on /boot/config.txt ) -eq 0 ] && sudo sed -e "|^#dtparam=i2c_arm=on|dtparam=i2c_arm=on|g" -i /boot/config.txt
