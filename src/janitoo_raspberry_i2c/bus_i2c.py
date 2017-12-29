@@ -79,6 +79,7 @@ class I2CBus(JNTBus):
         self.export_attrs('i2c_release', self.i2c_release)
         self.export_attrs('get_i2c_device', self.get_i2c_device)
         self.export_attrs('get_busnum', self.get_busnum)
+        self.export_attrs('get_adafruit_i2c', self.get_adafruit_i2c)
         self.export_attrs('software_reset', self.software_reset)
         self.export_attrs('require_repeated_start', self.require_repeated_start)
 
@@ -105,6 +106,10 @@ class I2CBus(JNTBus):
         if self.values["%s_busnum"%OID].data is None:
             return self._ada_i2c.get_default_bus()
         return self.values["%s_busnum"%OID].data
+
+    def get_adafruit_i2c(self):
+        """Get the I2C interface from adafruit"""
+        return self._ada_i2c
 
     def get_i2c_device(self, address, **kwargs):
         """Get the device at address"""
